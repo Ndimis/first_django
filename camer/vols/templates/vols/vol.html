@@ -1,0 +1,29 @@
+{% extends "vols/layout.html" %}
+
+{% block body %}
+<h1>Vol N° : {{ vol.id }}</h1>
+<ul>
+    <li>Départ : {{ vol.origin }} </li>
+    <li>Destination : {{ vol.destination }}</li>
+    <li>Durée : {{ vol.duration }}</li>
+</ul>
+<h2>Passagers enrégistrés :</h2>
+<ul>
+    {% for passenger in passengers %}
+    <li>{{ passenger}}</li>
+    {% empty %}
+    <li>Pas de passagers enrégistrés</li>
+    {% endfor %}
+</ul>
+<h2>Ajouter un passager :</h2>
+<form action="{% url 'book' vol.id %}" method="post">
+    {% csrf_token %}
+    <select name="passenger" id="">
+        {% for passenger in non_passengers %}
+            <option value="{{ passenger.id }}">{{ passenger }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit">
+</form>
+<a href="{% url 'index' %}">Retour à la liste des vols</a>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "vols/layout.html" %}
+{% block body %}
+    <h1>Vols</h1>
+    <ul>
+        {% for vol in vols %}
+        <li>
+            <a href="{% url 'vol' vol.id %}">
+                Vol {{ vol.id }} : {{ vol.origin }} pour {{ vol.destination }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
